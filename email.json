@@ -1,0 +1,10 @@
+{
+    "gmail_user": "indymetest@gmail.com",
+    "gmail_pwd" : "****",
+    "addresses": "me@indyme.com, me@gmail.com",
+    "link_port": 8181,
+    "subject": "CLX: Toys",
+    "location": "Toys",
+    "image": "foo_small.jpg",
+    "video": "foo.mp4"
+}
