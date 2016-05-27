@@ -113,12 +113,15 @@ with picamera.PiCamera() as camera:
                 write_video( stream );                     # Save the video capture
                 wrap_video();                              # wrap it in an MP4 container
                 downsize_image();                          # downsize the jpg image
-                send_gmail( "email.html", "Alert from CLX", "public/foo_small.jpg" );  # Send out the mail
+#                send_gmail( "email.html", "Alert from CLX", "public/foo_small.jpg" );  # Send out the mail
+                send_gmail( "email.html", "public/foo_small.jpg" );  # Send out the mail               
                 print "Restarting video"
                 camera.start_recording(stream, format='h264')                
                 write_now = False
             if exit_now:
                 break
+    except Exception as ex:
+        print "Exception!!! ", ex
 
     finally:
         print "Stopped camera"
