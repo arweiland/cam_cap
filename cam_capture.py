@@ -12,6 +12,7 @@ import picamera
 import signal
 import subprocess
 import datetime
+import os
 from send_gmail import send_gmail
 
 trigger_delay = 3            # How long after trigger before writing video
@@ -20,10 +21,15 @@ video_length = 10            # How long to record video
 write_now = False
 exit_now = False
 
-image_file = 'public/foo.jpg'
-small_image_file = 'public/foo_small.jpg'
-video_file = 'public/foo.h264'
-mp4_file = 'public/foo.mp4'
+# Get path we are running from.  Not current directory if started from script
+ourpath = os.path.dirname(os.path.abspath(__file__)) + '/'
+
+
+image_file = ourpath + 'public/foo.jpg'
+small_image_file = ourpath + 'public/foo_small.jpg'
+video_file = ourpath + 'public/foo.h264'
+mp4_file = ourpath + 'public/foo.mp4'
+email_file = ourpath + 'email.html'
 
 def write_image():
     # use_video_port = True to keep the camera from having to change modes
@@ -102,6 +108,9 @@ with picamera.PiCamera() as camera:
     stream = picamera.PiCameraCircularIO(camera, size = bsize )
     camera.start_recording(stream, format='h264')
 
+    camera.start_preview()
+    camera.preview_fullscreen = True
+    
     try:
         print "%s Camera capture started" % (datetime.datetime.now())
         while 1:
@@ -114,7 +123,7 @@ with picamera.PiCamera() as camera:
                 wrap_video();                              # wrap it in an MP4 container
                 downsize_image();                          # downsize the jpg image
 #                send_gmail( "email.html", "Alert from CLX", "public/foo_small.jpg" );  # Send out the mail
-                send_gmail( "email.html", "public/foo_small.jpg" );  # Send out the mail               
+                send_gmail( email_file, ourpath + "public/foo_small.jpg" );  # Send out the mail               
                 print "Restarting video"
                 camera.start_recording(stream, format='h264')                
                 write_now = False

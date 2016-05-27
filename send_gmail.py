@@ -19,11 +19,16 @@ email_str = ''
 our_ip = ''
 config = {}
 
+
+# Get path we are running from.  Not current directory if started from script
+ourpath = os.path.dirname(os.path.abspath(__file__)) + '/'
+
+
 # Read configuration file upon module load
 
 def read_config():
    global config
-   config = configs.read_config( "email.json" )
+   config = configs.read_config( ourpath + "email.json" )
    if ( config ):
       print "Email Config read"
 

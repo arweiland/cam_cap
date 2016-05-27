@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 // Quick and dirty node.js static web server
 
 var express = require('express');
