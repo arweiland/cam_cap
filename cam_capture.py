@@ -14,6 +14,8 @@ import subprocess
 import datetime
 import os
 from send_gmail import send_gmail
+import sys
+import traceback
 
 trigger_delay = 3            # How long after trigger before writing video
 video_length = 10            # How long to record video
@@ -23,6 +25,8 @@ exit_now = False
 
 # Get path we are running from.  Not current directory if started from script
 ourpath = os.path.dirname(os.path.abspath(__file__)) + '/'
+
+sys.path.append( ourpath[:-1] )         # Add current directory to search path for modules
 
 
 image_file = ourpath + 'public/foo.jpg'
@@ -131,6 +135,9 @@ with picamera.PiCamera() as camera:
                 break
     except Exception as ex:
         print "Exception!!! ", ex
+
+        errfile = open( "cam_cap.log", "w" )
+        traceback.print_tb( errfile )
 
     finally:
         print "Stopped camera"

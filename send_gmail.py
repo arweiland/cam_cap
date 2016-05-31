@@ -44,6 +44,11 @@ def get_our_ip():
 def read_email_template( fname ):
    global email_str
    from string import Template
+
+   # If we don't have our IP yet, get it now
+   if not our_ip:
+      get_our_ip()
+      
    with open( fname, "r" ) as email:
       text = email.read()
       s = Template( text )
@@ -123,7 +128,7 @@ def send_gmail( template, attachment=None ):
 #   "my_picture.jpg")
 
 read_config()              # Read the configuration file
-get_our_ip()               # Get our IP address (for email links)
+#get_our_ip()               # Get our IP address (for email links)
 
 if __name__ == "__main__":
    if len( sys.argv ) < 3:
