@@ -71,12 +71,16 @@ def write_video( stream ):
     stream.truncate()
 
 
-# This handler is entered when the program receives a SIGUSR2 signal
+# This handler is entered when the program receives a SIGUSR1 signal
 def signal_handler( signal, frame ):
     global write_now
     print "Got signal!"
     write_now = True
 
+# This handler shouldn't be entered at all
+def signal_handler2( signal, frame ):
+    print "Got signal 2!"
+    
 # This handler is entered when the program receives a SIGINT signal (^c)
 def exit_handler( signal, frame ):
     global exit_now
@@ -84,7 +88,10 @@ def exit_handler( signal, frame ):
     exit_now = True
 
 # Register the signal handler
-signal.signal(signal.SIGUSR2, signal_handler)
+signal.signal(signal.SIGUSR1, signal_handler)
+
+# Register the signal handler
+signal.signal(signal.SIGUSR2, signal_handler2)
 
 # Register the exit handler
 signal.signal(signal.SIGINT | signal.SIGTERM, exit_handler)
