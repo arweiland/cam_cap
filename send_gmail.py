@@ -108,7 +108,7 @@ def mail(to, subject, text, attach):
       mailServer.ehlo()
       mailServer.starttls()
       mailServer.ehlo()
-   except SMTPConnectError as e:
+   except smtplib.SMTPConnectError as e:
       print "SMTP failed: ", e
 
    mailServer.login(config["gmail_user"], config["gmail_pwd"])

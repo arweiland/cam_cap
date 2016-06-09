@@ -1,9 +1,9 @@
 {
     "gmail_user": "indymetest@gmail.com",
-    "gmail_pwd" : "****",
-    "addresses": "me@indyme.com, me@gmail.com",
+    "gmail_pwd" : "indyme123test",
+    "addresses": "weiland.ron@gmail.com, demo.indyme@gmail.com",
     "link_port": 8181,
-    "subject": "CLX: Toys",
+    "subject": "Smart Sense: Touch",
     "location": "Toys",
     "image": "foo_small.jpg",
     "video": "foo.mp4"
